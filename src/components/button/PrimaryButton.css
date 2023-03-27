@@ -1,0 +1,14 @@
+.btn {
+  padding: 4px 6px;
+  font-family: inherit;
+  cursor: pointer;
+  color: #eee;
+  background: #263057;
+  border: 1px solid #263057;
+  border-radius: 3px;
+}
+
+.btn:active {
+  color: #263057;
+  background: #eee;
+}
