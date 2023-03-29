@@ -1,0 +1,32 @@
+.input-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.input {
+  padding: 4px 6px;
+  font-family: inherit;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border: 1px solid #263057;
+  color: #263057;
+  background: transparent;
+}
+
+.input:focus {
+  outline: 1px solid #263057;
+}
+
+.input:focus + .placeholder,
+.input:valid + .placeholder {
+  display: none;
+}
+
+.placeholder {
+  position: absolute;
+  pointer-events: none;
+  color: #263057;
+}

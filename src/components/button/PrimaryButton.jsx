@@ -1,9 +1,12 @@
+import classNames from 'classnames';
 import React from 'react';
 import './PrimaryButton.css';
 
 function PrimaryButton(props) {
+  const btnClass = classNames(props.className);
+
   return (
-    <button className={props.classNames} onClick={props.onHandleClick}>
+    <button className={btnClass} onClick={props.onHandleClick}>
       {props.children}
     </button>
   );
