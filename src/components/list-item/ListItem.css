@@ -1,0 +1,68 @@
+.list-item {
+  margin-bottom: 0.625rem;
+  padding: 0.625rem;
+  list-style: none;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.list-item:hover {
+  cursor: pointer;
+}
+
+.list-item-body {
+  display: flex;
+  align-items: center;
+}
+
+.list-item-text {
+  position: relative;
+  margin-right: 0.625rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+.text {
+  font-size: 1.25rem;
+  pointer-events: none;
+}
+
+.text::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  content: '';
+  width: 0;
+  height: 2px;
+  background: #263057;
+}
+
+.text.done::before {
+  transition: width 0.6s linear;
+  width: 100%;
+}
+
+.white-space {
+  flex: 1;
+}
+
+.input-price {
+  margin-right: 0.625rem;
+}
+
+.price,
+.delete {
+  font-size: 0.875rem;
+}
+
+.price {
+  max-width: 5.625rem;
+  padding: 3px 2px;
+  border-radius: 3px;
+}
+
+.delete {
+  padding: 3px 4px;
+}
