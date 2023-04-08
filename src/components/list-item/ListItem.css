@@ -25,7 +25,6 @@
 }
 
 .text {
-  font-size: 1.25rem;
   pointer-events: none;
 }
 
@@ -53,16 +52,18 @@
 }
 
 .price,
-.delete {
+.delete,
+.price + .placeholder {
   font-size: 0.875rem;
 }
 
 .price {
-  max-width: 5.625rem;
+  max-width: 5rem;
   padding: 3px 2px;
   border-radius: 3px;
 }
 
 .delete {
   padding: 3px 4px;
+  font-size: 0.875rem;
 }
