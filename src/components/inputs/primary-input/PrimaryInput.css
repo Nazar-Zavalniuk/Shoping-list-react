@@ -15,8 +15,17 @@
   background: transparent;
 }
 
+.input.dark-mode {
+  color: #eee;
+  border-color: #3b336c;
+}
+
 .input:focus {
   outline: 1px solid #263057;
+}
+
+.input.dark-mode:focus {
+  outline-color: #3b336c;
 }
 
 .input:focus + .placeholder,
@@ -28,4 +37,8 @@
   position: absolute;
   pointer-events: none;
   color: #263057;
+}
+
+.placeholder.dark-mode {
+  color: #eee;
 }

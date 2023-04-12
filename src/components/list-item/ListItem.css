@@ -6,6 +6,10 @@
   border-radius: 5px;
 }
 
+.list-item.dark-mode {
+  border-color: #3b336c;
+}
+
 .list-item:hover {
   cursor: pointer;
 }
@@ -36,6 +40,10 @@
   width: 0;
   height: 2px;
   background: #263057;
+}
+
+.text.dark-mode::before {
+  background: #eee;
 }
 
 .text.done::before {

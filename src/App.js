@@ -17,7 +17,7 @@ function App() {
       <List />
       <TotalPrice totalPriceValue='0' />
       <Confirm confirmText='Delete all list?' />
-      <Information />
+      <Information infoText='Infromation text' />
     </div>
   );
 }

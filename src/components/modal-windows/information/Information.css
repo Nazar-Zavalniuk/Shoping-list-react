@@ -20,6 +20,11 @@
   background: #2630574d;
 }
 
+.information-text.dark-mode::-webkit-scrollbar-thumb {
+  background: #b4aaee4d;
+  border-color: #3b336c;
+}
+
 .input-block {
   margin: 1rem 0;
   width: 100%;

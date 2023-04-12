@@ -7,7 +7,17 @@
   border-radius: 3px;
 }
 
+.btn.dark-mode {
+  background: #221c44;
+  border-color: #221c44;
+}
+
 .btn:active {
   color: #263057;
   background: #eee;
+}
+
+.btn.dark-mode:active {
+  color: #eee;
+  background: transparent;
 }

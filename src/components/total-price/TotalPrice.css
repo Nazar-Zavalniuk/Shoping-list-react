@@ -12,3 +12,7 @@
   background: linear-gradient(180deg, #273158 0%, #0c244d 100%);
   border-radius: 5px;
 }
+
+.total-price-text.dark-mode {
+  background: #221c44;
+}

@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.checkbox-body.dark-mode {
+  border-color: #3b336c80;
+}
+
 .checkbox-btn {
   opacity: 0;
   height: 0;
@@ -37,12 +41,24 @@
   background: #fff;
 }
 
+.checkbox-btn:checked + .checkmark.dark-mode {
+  background: #18122e;
+}
+
 .checkbox-btn:checked + .checkmark:after {
   display: block;
+}
+
+.checkbox-btn:checked + .checkmark.dark-mode:after {
+  border-color: #eee;
 }
 
 @media (hover: hover) {
   .checkmark:hover {
     background: #fff;
+  }
+
+  .checkmark.dark-mode:hover {
+    background: #18122e;
   }
 }
