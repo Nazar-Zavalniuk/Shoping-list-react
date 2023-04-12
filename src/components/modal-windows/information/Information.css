@@ -1,0 +1,59 @@
+.modal-body.information {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  max-width: 60%;
+  max-height: 30%;
+}
+
+.information-text {
+  padding-right: 3px;
+  text-align: center;
+  overflow: auto;
+}
+
+.information-text::-webkit-scrollbar {
+  width: 2px;
+}
+
+.information-text::-webkit-scrollbar-thumb {
+  background: #2630574d;
+}
+
+.input-block {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.price-clone {
+  padding: 2px;
+  flex: 1 1 auto;
+  border-radius: 3px;
+}
+
+.price-clone,
+.save,
+.cancel {
+  font-size: inherit;
+}
+
+.information-buttons {
+  width: 100%;
+}
+
+.information-buttons-body {
+  display: flex;
+  column-gap: 2px;
+}
+
+.save,
+.cancel {
+  flex: 1;
+  padding: 2px;
+}
+
+@media (min-width: 850px) {
+  .modal-body.information {
+    max-width: 31.875rem;
+  }
+}
