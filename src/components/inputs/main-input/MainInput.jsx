@@ -11,9 +11,7 @@ function MainInput(props) {
           className={['input', 'item-input']}
           placeholderText={'Enter a new item'}
         />
-        <PrimaryButton className={['btn', 'enter']}>
-          <span className='text-btn'>Enter</span>
-        </PrimaryButton>
+        <PrimaryButton className={['btn', 'enter']} text='Enter' />
       </div>
     </div>
   );

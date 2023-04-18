@@ -7,7 +7,7 @@ function PrimaryButton(props) {
 
   return (
     <button className={btnClass} onClick={props.onHandleClick}>
-      {props.children}
+      <span className='text-btn'>{props.text}</span>
     </button>
   );
 }

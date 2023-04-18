@@ -19,9 +19,7 @@ function ListItem(props) {
             placeholderText={'Set a price'}
           />
         </div>
-        <PrimaryButton className={['btn', 'delete']}>
-          <span className='text-btn'>Delete</span>
-        </PrimaryButton>
+        <PrimaryButton className={['btn', 'delete']} text='Delete' />
       </div>
     </li>
   );

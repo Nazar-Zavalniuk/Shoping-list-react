@@ -13,9 +13,7 @@ function List(props) {
       </ul>
       <div className='remove-item-list'>
         <div className='remove-item-list-body'>
-          <PrimaryButton className={['btn', 'delete-all']}>
-            <span className='text-btn'>Delete all</span>
-          </PrimaryButton>
+          <PrimaryButton className={['btn', 'delete-all']} text='Delete all' />
         </div>
       </div>
     </div>
