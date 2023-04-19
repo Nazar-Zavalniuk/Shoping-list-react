@@ -16,12 +16,8 @@ function Information(props) {
       </div>
       <div className='information-buttons'>
         <div className='information-buttons-body'>
-          <PrimaryButton className={'btn save'}>
-            <span className='text-btn'>Save</span>
-          </PrimaryButton>
-          <PrimaryButton className={'btn cancel'}>
-            <span className='text-btn'>Cancel</span>
-          </PrimaryButton>
+          <PrimaryButton className={'btn save'} text='Save' />
+          <PrimaryButton className={'btn cancel'} text='Cancel' />
         </div>
       </div>
     </PrimaryModalWindow>

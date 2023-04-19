@@ -9,12 +9,8 @@ function Confirm(props) {
       <div className='confirm-text'>{props.confirmText}</div>
       <div className='confirm-buttons'>
         <div className='confirm-buttons-body'>
-          <PrimaryButton className={'btn yes'}>
-            <span className='text-btn'>Yes</span>
-          </PrimaryButton>
-          <PrimaryButton className={'btn no'}>
-            <span className='text-btn'>No</span>
-          </PrimaryButton>
+          <PrimaryButton className={'btn yes'} text='Yes' />
+          <PrimaryButton className={'btn no'} text='No' />
         </div>
       </div>
     </PrimaryModalWindow>
