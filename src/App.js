@@ -10,11 +10,11 @@ import Information from './components/modal-windows/information/Information';
 import {ContextApp} from './context/ContextApp';
 
 function App() {
-  const [context, setContext] = useState([]);
+  const [items, setItems] = useState([]);
   const [theme, setTheme] = useState('');
 
   return (
-    <ContextApp.Provider value={{context, setContext, theme, setTheme}}>
+    <ContextApp.Provider value={{items, setItems, theme, setTheme}}>
       <div className={`app ${theme}`}>
         <div className='content'>
           <Switch textLabel='DM' />
