@@ -12,9 +12,25 @@ import {ContextApp} from './context/ContextApp';
 function App() {
   const [items, setItems] = useState([]);
   const [theme, setTheme] = useState('');
+  const [isConfirmActive, setIsConfirmActive] = useState('');
+  const [isInformationActive, setIsInformationActive] = useState('');
+  const [information, setInformation] = useState({text: '', value: ''});
 
   return (
-    <ContextApp.Provider value={{items, setItems, theme, setTheme}}>
+    <ContextApp.Provider
+      value={{
+        items,
+        setItems,
+        theme,
+        setTheme,
+        isConfirmActive,
+        setIsConfirmActive,
+        isInformationActive,
+        setIsInformationActive,
+        information,
+        setInformation,
+      }}
+    >
       <div className={`app ${theme}`}>
         <div className='content'>
           <Switch textLabel='DM' />
@@ -23,7 +39,7 @@ function App() {
           <List />
           <TotalPrice totalPriceValue='0' />
           <Confirm confirmText='Delete all list?' />
-          <Information infoText='Infromation text' />
+          <Information />
         </div>
       </div>
     </ContextApp.Provider>

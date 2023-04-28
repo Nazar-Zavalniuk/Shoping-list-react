@@ -3,15 +3,15 @@ import React, {useContext} from 'react';
 import './PrimaryInput.css';
 import {ContextApp} from '../../../context/ContextApp';
 
-function PrimaryInput({...props}) {
+function PrimaryInput({placeholderText, className, value, ...props}) {
   const {theme} = useContext(ContextApp);
-  const classNameInput = classNames(props.className);
-  const placeholderText = classNames(props.placeholderText);
+  const classNameInput = classNames(className);
 
   return (
     <div className='input-body'>
       <input
         {...props}
+        value={value}
         type='text'
         className={`${classNameInput} ${theme}`}
         required

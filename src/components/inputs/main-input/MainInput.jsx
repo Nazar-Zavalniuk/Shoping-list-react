@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import './MainInput.css';
 import PrimaryButton from '../../button/PrimaryButton';
 import PrimaryInput from '../primary-input/PrimaryInput';
@@ -8,43 +8,34 @@ function MainInput(props) {
   const {items, setItems} = useContext(ContextApp);
   const [value, setValue] = useState('');
 
-  function updateValue(e) {
-    setValue(e.target.value);
-  }
+  const addItems = useCallback(
+    (e) => {
+      if (e.keyCode === 13) {
+        setItems([...items, {id: Date.now(), text: value}]);
+        setValue('');
+      }
+    },
+    [items, value, setItems],
+  );
 
-  function addItems(e) {
-    if (e.keyCode === 13) {
-      setItems([
-        ...items,
-        {active: false, id: Date.now(), text: value, value: ''},
-      ]);
-      setValue('');
-    }
-  }
-
-  function addItemsByBtn() {
-    setItems([
-      ...items,
-      {active: false, id: Date.now(), text: value, value: ''},
-    ]);
+  const addItemsByBtn = useCallback(() => {
+    setItems([...items, {id: Date.now(), text: value}]);
     setValue('');
-  }
+  }, [items, value, setItems]);
 
   return (
     <div className='main-input'>
       <div className='main-input-body'>
         <PrimaryInput
           onKeyDown={addItems}
-          onChange={updateValue}
+          onChange={(e) => setValue(e.target.value)}
           value={value}
           className={['input', 'item-input']}
           placeholderText={'Enter a new item'}
         />
-        <PrimaryButton
-          onClick={addItemsByBtn}
-          className={['btn', 'enter']}
-          text='Enter'
-        />
+        <PrimaryButton onClick={addItemsByBtn} className={['btn', 'enter']}>
+          Enter
+        </PrimaryButton>
       </div>
     </div>
   );
