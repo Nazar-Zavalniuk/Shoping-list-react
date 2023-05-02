@@ -1,40 +1,61 @@
-import React, {useCallback, useContext, useState} from 'react';
+import React, {useCallback, useContext} from 'react';
 import './ListItem.css';
 import Checkbox from '../checkbox/Checkbox';
 import PrimaryInput from '../inputs/primary-input/PrimaryInput';
 import PrimaryButton from '../button/PrimaryButton';
 import {ContextApp} from '../../context/ContextApp';
 
-function ListItem({listItemText, removeItem, item}) {
-  const {theme, setIsInformationActive, setInformation} = useContext(ContextApp);
-  const [isActive, setIsActive] = useState(false);
-  const [isDone, setIsDone] = useState('');
-  const [price, setPrice] = useState('');
+function ListItem({listItemText, removeItem, item, indexItem}) {
+  const {theme, items, setItems, setIsModalWindowActive} = useContext(ContextApp);
 
   const stopPropagation = useCallback((e) => {
     e.stopPropagation();
   }, []);
 
   const openInfoWindow = useCallback(() => {
-    setInformation({text: item.text, value: price});
-    setIsInformationActive('active');
-  }, [setInformation, setIsInformationActive, item.text, price]);
+    setIsModalWindowActive({
+      information: {class: 'active', text: item.text, price: item.price, indexItem},
+      confirm: '',
+    });
+  }, [setIsModalWindowActive, item.text, item.price, indexItem]);
 
   const toggle = useCallback(() => {
-    setIsActive(!isActive);
+    let newItems = [...items];
 
-    if (isDone === '') {
-      setIsDone('done');
-    } else setIsDone('');
-  }, [isActive, isDone]);
-
-  const validator = useCallback((e) => {
-    const price = e.target.value.replace(',', '.');
-
-    if (!isNaN(price)) {
-      setPrice(price);
+    if (item.marked.state) {
+      newItems.splice(indexItem, 1, {...item, marked: {state: false, class: ''}});
+    } else {
+      newItems.splice(indexItem, 1, {...item, marked: {state: true, class: 'done'}});
     }
-  }, []);
+
+    setItems(newItems);
+  }, [items, setItems, item, indexItem]);
+
+  const validator = useCallback(
+    (e) => {
+      let newItems = [...items];
+      let price = e.target.value.replace(',', '.');
+
+      if (!isNaN(price)) {
+        newItems.splice(indexItem, 1, {...item, price});
+        setItems(newItems);
+      }
+    },
+    [items, setItems, item, indexItem],
+  );
+
+  const roundPrice = useCallback(
+    (e) => {
+      let newItems = [...items];
+      let price = item.price;
+
+      if (price !== '') {
+        newItems.splice(indexItem, 1, {...item, price: parseFloat(price).toFixed(2)});
+        setItems(newItems);
+      }
+    },
+    [items, setItems, indexItem, item],
+  );
 
   const blur = useCallback((e) => {
     if (e.keyCode === 13) {
@@ -45,9 +66,9 @@ function ListItem({listItemText, removeItem, item}) {
   return (
     <li onClick={openInfoWindow} className={`list-item ${theme}`}>
       <div className='list-item-body'>
-        <Checkbox stopPropagation={stopPropagation} onChange={toggle} active={isActive} />
+        <Checkbox stopPropagation={stopPropagation} onChange={toggle} marked={item.marked.state} />
         <div className='list-item-text'>
-          <span className={`text ${theme} ${isDone}`}>{listItemText}</span>
+          <span className={`text ${theme} ${item.marked.class}`}>{listItemText}</span>
         </div>
         <div className='white-space'></div>
         <div className='input-price'>
@@ -55,7 +76,8 @@ function ListItem({listItemText, removeItem, item}) {
             onClick={stopPropagation}
             onKeyDown={blur}
             onChange={validator}
-            value={price}
+            onBlur={roundPrice}
+            value={item.price}
             className={['input', 'price']}
             placeholderText={'Set a price'}
           />

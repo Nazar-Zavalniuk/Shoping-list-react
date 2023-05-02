@@ -11,7 +11,10 @@ function MainInput(props) {
   const addItems = useCallback(
     (e) => {
       if (e.keyCode === 13) {
-        setItems([...items, {id: Date.now(), text: value}]);
+        setItems([
+          ...items,
+          {id: Date.now(), marked: {state: false, class: ''}, text: value, price: ''},
+        ]);
         setValue('');
       }
     },
@@ -19,7 +22,10 @@ function MainInput(props) {
   );
 
   const addItemsByBtn = useCallback(() => {
-    setItems([...items, {id: Date.now(), text: value}]);
+    setItems([
+      ...items,
+      {id: Date.now(), marked: {state: false, class: ''}, text: value, price: ''},
+    ]);
     setValue('');
   }, [items, value, setItems]);
 
@@ -28,7 +34,9 @@ function MainInput(props) {
       <div className='main-input-body'>
         <PrimaryInput
           onKeyDown={addItems}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) =>
+            setValue(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))
+          }
           value={value}
           className={['input', 'item-input']}
           placeholderText={'Enter a new item'}

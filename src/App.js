@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './style/App.css';
 import Switch from './components/switch/Switch';
 import Title from './components/title/Title';
@@ -12,24 +12,39 @@ import {ContextApp} from './context/ContextApp';
 function App() {
   const [items, setItems] = useState([]);
   const [theme, setTheme] = useState('');
-  const [isConfirmActive, setIsConfirmActive] = useState('');
-  const [isInformationActive, setIsInformationActive] = useState('');
-  const [information, setInformation] = useState({text: '', value: ''});
+  const [isModalWindowActive, setIsModalWindowActive] = useState({
+    information: {class: '', text: '', price: '', indexItem: null},
+    confirm: '',
+  });
+  const [totalPrice, setTotalPrice] = useState('');
+
+  useEffect(() => {
+    const prices = [];
+
+    items.forEach((item) => {
+      if (item.marked.state && item.price !== '') {
+        prices.push(parseFloat(item.price));
+      }
+    });
+
+    function addFractions(fractions) {
+      // Сonvert fractions to whole numbers
+      const convertedFractions = fractions.map((f) => f * 100);
+
+      // Add integers and convert back to fractions
+      const sum = convertedFractions.reduce((acc, val) => acc + val, 0) / 100;
+
+      const roundedSum = sum.toFixed(2);
+
+      return roundedSum;
+    }
+
+    setTotalPrice(addFractions(prices));
+  }, [items]);
 
   return (
     <ContextApp.Provider
-      value={{
-        items,
-        setItems,
-        theme,
-        setTheme,
-        isConfirmActive,
-        setIsConfirmActive,
-        isInformationActive,
-        setIsInformationActive,
-        information,
-        setInformation,
-      }}
+      value={{items, setItems, theme, setTheme, isModalWindowActive, setIsModalWindowActive}}
     >
       <div className={`app ${theme}`}>
         <div className='content'>
@@ -37,7 +52,7 @@ function App() {
           <Title />
           <MainInput />
           <List />
-          <TotalPrice totalPriceValue='0' />
+          <TotalPrice totalPriceValue={totalPrice} />
           <Confirm confirmText='Delete all list?' />
           <Information />
         </div>

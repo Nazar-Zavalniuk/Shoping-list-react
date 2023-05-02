@@ -1,15 +1,15 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext} from 'react';
 import './List.css';
 import ListItem from '../list-item/ListItem';
 import PrimaryButton from '../button/PrimaryButton';
 import {ContextApp} from '../../context/ContextApp';
 
 function List(props) {
-  const {items, setItems, setIsConfirmActive} = useContext(ContextApp);
+  const {items, setItems, isModalWindowActive, setIsModalWindowActive} = useContext(ContextApp);
 
   const openWindowConfirm = useCallback(() => {
-    setIsConfirmActive('active');
-  }, [setIsConfirmActive]);
+    setIsModalWindowActive({...isModalWindowActive, confirm: 'active'});
+  }, [isModalWindowActive, setIsModalWindowActive]);
 
   const removeItem = useCallback(
     (item) => {
@@ -21,8 +21,14 @@ function List(props) {
   return (
     <div className='item-list'>
       <ul className='list'>
-        {items.map((item) => (
-          <ListItem removeItem={removeItem} item={item} key={item.id} listItemText={item.text} />
+        {items.map((item, index) => (
+          <ListItem
+            removeItem={removeItem}
+            item={item}
+            indexItem={index}
+            key={item.id}
+            listItemText={item.text}
+          />
         ))}
       </ul>
       {items.length >= 3 && (

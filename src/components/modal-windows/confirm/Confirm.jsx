@@ -5,19 +5,19 @@ import PrimaryButton from '../../button/PrimaryButton';
 import {ContextApp} from '../../../context/ContextApp';
 
 function Confirm(props) {
-  const {isConfirmActive, setIsConfirmActive, setItems} = useContext(ContextApp);
+  const {isModalWindowActive, setIsModalWindowActive, setItems} = useContext(ContextApp);
 
   const closeWindow = useCallback(() => {
-    setIsConfirmActive('');
-  }, [setIsConfirmActive]);
+    setIsModalWindowActive({...isModalWindowActive, confirm: ''});
+  }, [isModalWindowActive, setIsModalWindowActive]);
 
   const closeWindowAndDeleteList = useCallback(() => {
-    setIsConfirmActive('');
+    closeWindow();
     setItems([]);
-  }, [setIsConfirmActive, setItems]);
+  }, [setItems, closeWindow]);
 
   return (
-    <PrimaryModalWindow className={`confirm ${isConfirmActive}`}>
+    <PrimaryModalWindow className={`confirm ${isModalWindowActive.confirm}`}>
       <div className='confirm-text'>{props.confirmText}</div>
       <div className='confirm-buttons'>
         <div className='confirm-buttons-body'>
