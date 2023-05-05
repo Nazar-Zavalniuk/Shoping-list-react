@@ -7,13 +7,20 @@ import {ContextApp} from '../../../context/ContextApp';
 
 function Information(props) {
   const {items, setItems, isModalWindowActive, setIsModalWindowActive} = useContext(ContextApp);
+  const {information} = isModalWindowActive;
 
   const closeWindow = useCallback(() => {
     setIsModalWindowActive({
-      information: {class: '', text: '', price: '', indexItem: null},
+      information: {...information, class: ''},
       confirm: '',
     });
-  }, [setIsModalWindowActive]);
+    setTimeout(() => {
+      setIsModalWindowActive({
+        information: {class: '', text: '', price: '', indexItem: null},
+        confirm: '',
+      });
+    }, 400);
+  }, [setIsModalWindowActive, information]);
 
   const validator = useCallback(
     (e) => {
@@ -21,44 +28,46 @@ function Information(props) {
 
       if (!isNaN(price)) {
         setIsModalWindowActive({
-          information: {...isModalWindowActive.information, price},
+          information: {...information, price},
           confirm: '',
         });
       }
     },
-    [isModalWindowActive, setIsModalWindowActive],
+    [information, setIsModalWindowActive],
   );
 
-  const save = useCallback(() => {
-    let newItems = [...items];
-    let indexItem = isModalWindowActive.information.indexItem;
-    let item = items[indexItem];
-    let price = isModalWindowActive.information.price;
+  const saveAndCloseWindow = useCallback(() => {
+    const newItems = [...items];
+    const indexItem = information.indexItem;
+    const item = items[indexItem];
+    const price = information.price;
 
     newItems.splice(indexItem, 1, {...item, price});
     setItems(newItems);
-    setIsModalWindowActive({
-      information: {class: '', text: '', price: '', indexItem: null},
-      confirm: '',
-    });
-  }, [
-    items,
-    setItems,
-    isModalWindowActive.information.indexItem,
-    isModalWindowActive.information.price,
-    setIsModalWindowActive,
-  ]);
+    closeWindow();
+  }, [items, setItems, information.indexItem, information.price, closeWindow]);
 
   const roundPrice = useCallback(() => {
-    let price = isModalWindowActive.information.price;
+    const price = information.price;
+    const [integer = '', fraction = ''] = price.split('.');
 
-    if (price !== '') {
+    if (price !== '' && fraction.length >= 2) {
       setIsModalWindowActive({
-        information: {...isModalWindowActive.information, price: parseFloat(price).toFixed(2)},
+        information: {...information, price: integer + '.' + fraction.slice(0, 2)},
+        confirm: '',
+      });
+    } else if (price !== '' && fraction.length === 1) {
+      setIsModalWindowActive({
+        information: {...information, price: integer + '.' + fraction + '0'},
+        confirm: '',
+      });
+    } else if (price !== '') {
+      setIsModalWindowActive({
+        information: {...information, price: integer + '.00'},
         confirm: '',
       });
     }
-  }, [setIsModalWindowActive, isModalWindowActive.information]);
+  }, [setIsModalWindowActive, information]);
 
   const blur = useCallback((e) => {
     if (e.keyCode === 13) {
@@ -67,21 +76,21 @@ function Information(props) {
   }, []);
 
   return (
-    <PrimaryModalWindow className={`information ${isModalWindowActive.information.class}`}>
-      <div className='information-text'>{isModalWindowActive.information.text}</div>
+    <PrimaryModalWindow className={`information ${information.class}`}>
+      <div className='information-text'>{information.text}</div>
       <div className='input-block'>
         <PrimaryInput
           onBlur={roundPrice}
           onKeyDown={blur}
           onChange={validator}
-          value={isModalWindowActive.information.price}
+          value={information.price}
           className={['input', 'price-clone']}
           placeholderText={'Set a price'}
         />
       </div>
       <div className='information-buttons'>
         <div className='information-buttons-body'>
-          <PrimaryButton onClick={save} className={'btn save'}>
+          <PrimaryButton onClick={saveAndCloseWindow} className={'btn save'}>
             Save
           </PrimaryButton>
           <PrimaryButton onClick={closeWindow} className={'btn cancel'}>
