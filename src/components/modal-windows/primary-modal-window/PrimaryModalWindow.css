@@ -9,22 +9,22 @@
   align-items: center;
   opacity: 0;
   pointer-events: none;
-  transition: 0.4s ease 0.25s;
+  transition: 0.25s ease 0s;
   background: rgba(0, 0, 0, 0.4);
 }
 
 .modal.active {
   pointer-events: all;
   opacity: 1;
-  transition: 0.6s ease 0s;
+  transition: 0.25s ease 0s;
 }
 
 .modal-body {
   padding: 1rem;
   border-radius: 5px;
   background: #eee;
-  transform: scale(0);
-  transition: transform 0.4s ease 0s;
+  transform: scale(0.5);
+  transition: transform 0.25s ease 0s;
 }
 
 .modal-body.dark-mode {
@@ -33,5 +33,5 @@
 
 .modal-body.active {
   transform: scale(1);
-  transition: transform 0.6s ease 0s;
+  transition: transform 0.25s ease 0s;
 }
