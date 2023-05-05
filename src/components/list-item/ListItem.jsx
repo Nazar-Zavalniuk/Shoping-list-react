@@ -20,7 +20,7 @@ function ListItem({listItemText, removeItem, item, indexItem}) {
   }, [setIsModalWindowActive, item.text, item.price, indexItem]);
 
   const toggle = useCallback(() => {
-    let newItems = [...items];
+    const newItems = [...items];
 
     if (item.marked.state) {
       newItems.splice(indexItem, 1, {...item, marked: {state: false, class: ''}});
@@ -33,8 +33,8 @@ function ListItem({listItemText, removeItem, item, indexItem}) {
 
   const validator = useCallback(
     (e) => {
-      let newItems = [...items];
-      let price = e.target.value.replace(',', '.');
+      const newItems = [...items];
+      const price = e.target.value.replace(',', '.');
 
       if (!isNaN(price)) {
         newItems.splice(indexItem, 1, {...item, price});
@@ -46,11 +46,18 @@ function ListItem({listItemText, removeItem, item, indexItem}) {
 
   const roundPrice = useCallback(
     (e) => {
-      let newItems = [...items];
-      let price = item.price;
+      const newItems = [...items];
+      const price = item.price;
+      const [integer = '', fraction = ''] = price.split('.');
 
-      if (price !== '') {
-        newItems.splice(indexItem, 1, {...item, price: parseFloat(price).toFixed(2)});
+      if (price !== '' && fraction.length >= 2) {
+        newItems.splice(indexItem, 1, {...item, price: integer + '.' + fraction.slice(0, 2)});
+        setItems(newItems);
+      } else if (price !== '' && fraction.length === 1) {
+        newItems.splice(indexItem, 1, {...item, price: integer + '.' + fraction + '0'});
+        setItems(newItems);
+      } else if (price !== '') {
+        newItems.splice(indexItem, 1, {...item, price: integer + '.00'});
         setItems(newItems);
       }
     },
