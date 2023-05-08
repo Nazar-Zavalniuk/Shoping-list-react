@@ -1,22 +1,17 @@
 import classNames from 'classnames';
-import React, {useContext} from 'react';
+import React from 'react';
 import './PrimaryInput.css';
-import {ContextApp} from '../../../context/ContextApp';
+import useAppState from '../../../context/hook/useAppState';
 
-function PrimaryInput({placeholderText, className, value, ...props}) {
-  const {theme} = useContext(ContextApp);
-  const classNameInput = classNames(className);
+function PrimaryInput({placeholderText, value, ...props}) {
+  const {theme} = useAppState();
+  const classNameInput = classNames(props.className, theme);
+  const classNamePlaceholder = classNames('placeholder', theme);
 
   return (
     <div className='input-body'>
-      <input
-        {...props}
-        value={value}
-        type='text'
-        className={`${classNameInput} ${theme}`}
-        required
-      />
-      <div className={`placeholder ${theme}`}>{placeholderText}</div>
+      <input {...props} value={value} type='text' className={classNameInput} required />
+      <div className={classNamePlaceholder}>{placeholderText}</div>
     </div>
   );
 }

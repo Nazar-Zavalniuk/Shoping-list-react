@@ -1,14 +1,14 @@
 import classNames from 'classnames';
-import React, {useContext} from 'react';
+import React from 'react';
 import './PrimaryButton.css';
-import {ContextApp} from '../../context/ContextApp';
+import useAppState from '../../context/hook/useAppState';
 
 function PrimaryButton({children, ...props}) {
-  const {theme} = useContext(ContextApp);
-  const btnClass = classNames(props.className);
+  const {theme} = useAppState();
+  const btnClass = classNames(props.className, theme);
 
   return (
-    <button {...props} className={`${btnClass} ${theme}`}>
+    <button {...props} className={btnClass}>
       <span className='text-btn'>{children}</span>
     </button>
   );

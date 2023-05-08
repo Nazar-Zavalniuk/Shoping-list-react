@@ -1,15 +1,16 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import './PrimaryModalWindow.css';
 import classNames from 'classnames';
-import {ContextApp} from '../../../context/ContextApp';
+import useAppState from '../../../context/hook/useAppState';
 
 function PrimaryModalWindow(props) {
-  const {theme} = useContext(ContextApp);
-  const className = classNames(props.className);
+  const {theme} = useAppState();
+  const classNameBlock = classNames('modal', props.className);
+  const classNameBody = classNames('modal-body', props.className, theme);
 
   return (
-    <div className={`modal ${className}`}>
-      <div className={`modal-body ${className} ${theme}`}>{props.children}</div>
+    <div className={classNameBlock}>
+      <div className={classNameBody}>{props.children}</div>
     </div>
   );
 }

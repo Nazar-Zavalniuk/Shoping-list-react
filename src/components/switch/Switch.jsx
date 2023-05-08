@@ -1,12 +1,12 @@
-import React, {useContext, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import './Switch.css';
-import {ContextApp} from '../../context/ContextApp';
+import useAppState from '../../context/hook/useAppState';
 
 function Switch(props) {
-  const {setTheme} = useContext(ContextApp);
+  const {setTheme} = useAppState();
   const [isTogleOn, setIsTogleOn] = useState(false);
 
-  function toggle() {
+  const toggle = useCallback(() => {
     if (isTogleOn) {
       setIsTogleOn(false);
       setTheme('');
@@ -14,7 +14,7 @@ function Switch(props) {
       setIsTogleOn(true);
       setTheme('dark-mode');
     }
-  }
+  }, [isTogleOn, setIsTogleOn, setTheme]);
 
   return (
     <div className='theme'>
