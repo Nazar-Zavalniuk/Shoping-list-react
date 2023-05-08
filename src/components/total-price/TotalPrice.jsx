@@ -1,15 +1,19 @@
-import React, {useContext} from 'react';
+import React, {useState} from 'react';
 import './TotalPrice.css';
-import {ContextApp} from '../../context/ContextApp';
+import useAppState from '../../context/hook/useAppState';
+import useCalcutateTotalPice from '../../hooks/useCalcutateTotalPice';
+import classNames from 'classnames';
 
 function TotalPrice(props) {
-  const {theme} = useContext(ContextApp);
+  const {theme, items} = useAppState();
+  const [totalPrice, setTotalPrice] = useState('');
+  const className = classNames('total-price-text', theme);
+
+  useCalcutateTotalPice(items, setTotalPrice);
 
   return (
     <div className='total-price'>
-      <div className={`total-price-text ${theme}`}>
-        Total Price: {props.totalPriceValue}
-      </div>
+      <div className={className}>Total Price: {totalPrice}</div>
     </div>
   );
 }
