@@ -1,11 +1,11 @@
-import React, {useCallback, useContext} from 'react';
+import React, {useCallback} from 'react';
 import './List.css';
 import ListItem from '../list-item/ListItem';
 import PrimaryButton from '../button/PrimaryButton';
-import {ContextApp} from '../../context/ContextApp';
+import useAppState from '../../context/hook/useAppState';
 
 function List(props) {
-  const {items, setItems, isModalWindowActive, setIsModalWindowActive} = useContext(ContextApp);
+  const {items, setItems, isModalWindowActive, setIsModalWindowActive} = useAppState();
 
   const openWindowConfirm = useCallback(() => {
     setIsModalWindowActive({...isModalWindowActive, confirm: 'active'});
@@ -34,7 +34,7 @@ function List(props) {
       {items.length >= 3 && (
         <div className='remove-item-list'>
           <div className='remove-item-list-body'>
-            <PrimaryButton onClick={openWindowConfirm} className={['btn', 'delete-all']}>
+            <PrimaryButton onClick={openWindowConfirm} className='btn delete-all'>
               Delete all
             </PrimaryButton>
           </div>

@@ -1,13 +1,15 @@
-import React, {useContext, useCallback} from 'react';
+import React, {useCallback} from 'react';
 import './Information.css';
 import PrimaryModalWindow from '../primary-modal-window/PrimaryModalWindow';
 import PrimaryInput from '../../inputs/primary-input/PrimaryInput';
 import PrimaryButton from '../../button/PrimaryButton';
-import {ContextApp} from '../../../context/ContextApp';
+import useAppState from '../../../context/hook/useAppState';
+import classNames from 'classnames';
 
 function Information(props) {
-  const {items, setItems, isModalWindowActive, setIsModalWindowActive} = useContext(ContextApp);
+  const {items, setItems, isModalWindowActive, setIsModalWindowActive} = useAppState();
   const {information} = isModalWindowActive;
+  const className = classNames('information', information.class);
 
   const closeWindow = useCallback(() => {
     setIsModalWindowActive({
@@ -19,7 +21,7 @@ function Information(props) {
         information: {class: '', text: '', price: '', indexItem: null},
         confirm: '',
       });
-    }, 400);
+    }, 250);
   }, [setIsModalWindowActive, information]);
 
   const validator = useCallback(
@@ -76,7 +78,7 @@ function Information(props) {
   }, []);
 
   return (
-    <PrimaryModalWindow className={`information ${information.class}`}>
+    <PrimaryModalWindow className={className}>
       <div className='information-text'>{information.text}</div>
       <div className='input-block'>
         <PrimaryInput
@@ -84,16 +86,16 @@ function Information(props) {
           onKeyDown={blur}
           onChange={validator}
           value={information.price}
-          className={['input', 'price-clone']}
-          placeholderText={'Set a price'}
+          className='input price-clone'
+          placeholderText='Set a price'
         />
       </div>
       <div className='information-buttons'>
         <div className='information-buttons-body'>
-          <PrimaryButton onClick={saveAndCloseWindow} className={'btn save'}>
+          <PrimaryButton onClick={saveAndCloseWindow} className='btn save'>
             Save
           </PrimaryButton>
-          <PrimaryButton onClick={closeWindow} className={'btn cancel'}>
+          <PrimaryButton onClick={closeWindow} className='btn cancel'>
             Cancel
           </PrimaryButton>
         </div>

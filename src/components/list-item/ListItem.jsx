@@ -1,12 +1,15 @@
-import React, {useCallback, useContext} from 'react';
+import React, {useCallback} from 'react';
 import './ListItem.css';
 import Checkbox from '../checkbox/Checkbox';
 import PrimaryInput from '../inputs/primary-input/PrimaryInput';
 import PrimaryButton from '../button/PrimaryButton';
-import {ContextApp} from '../../context/ContextApp';
+import useAppState from '../../context/hook/useAppState';
+import classNames from 'classnames';
 
 function ListItem({listItemText, removeItem, item, indexItem}) {
-  const {theme, items, setItems, setIsModalWindowActive} = useContext(ContextApp);
+  const {theme, items, setItems, setIsModalWindowActive} = useAppState();
+  const classNameLi = classNames('list-item', theme);
+  const classNameSpan = classNames('text', theme, item.marked.class);
 
   const stopPropagation = useCallback((e) => {
     e.stopPropagation();
@@ -44,25 +47,22 @@ function ListItem({listItemText, removeItem, item, indexItem}) {
     [items, setItems, item, indexItem],
   );
 
-  const roundPrice = useCallback(
-    (e) => {
-      const newItems = [...items];
-      const price = item.price;
-      const [integer = '', fraction = ''] = price.split('.');
+  const roundPrice = useCallback(() => {
+    const newItems = [...items];
+    const price = item.price;
+    const [integer = '', fraction = ''] = price.split('.');
 
-      if (price !== '' && fraction.length >= 2) {
-        newItems.splice(indexItem, 1, {...item, price: integer + '.' + fraction.slice(0, 2)});
-        setItems(newItems);
-      } else if (price !== '' && fraction.length === 1) {
-        newItems.splice(indexItem, 1, {...item, price: integer + '.' + fraction + '0'});
-        setItems(newItems);
-      } else if (price !== '') {
-        newItems.splice(indexItem, 1, {...item, price: integer + '.00'});
-        setItems(newItems);
-      }
-    },
-    [items, setItems, indexItem, item],
-  );
+    if (price !== '' && fraction.length >= 2) {
+      newItems.splice(indexItem, 1, {...item, price: integer + '.' + fraction.slice(0, 2)});
+      setItems(newItems);
+    } else if (price !== '' && fraction.length === 1) {
+      newItems.splice(indexItem, 1, {...item, price: integer + '.' + fraction + '0'});
+      setItems(newItems);
+    } else if (price !== '') {
+      newItems.splice(indexItem, 1, {...item, price: integer + '.00'});
+      setItems(newItems);
+    }
+  }, [items, setItems, indexItem, item]);
 
   const blur = useCallback((e) => {
     if (e.keyCode === 13) {
@@ -71,11 +71,11 @@ function ListItem({listItemText, removeItem, item, indexItem}) {
   }, []);
 
   return (
-    <li onClick={openInfoWindow} className={`list-item ${theme}`}>
+    <li onClick={openInfoWindow} className={classNameLi}>
       <div className='list-item-body'>
         <Checkbox stopPropagation={stopPropagation} onChange={toggle} marked={item.marked.state} />
         <div className='list-item-text'>
-          <span className={`text ${theme} ${item.marked.class}`}>{listItemText}</span>
+          <span className={classNameSpan}>{listItemText}</span>
         </div>
         <div className='white-space'></div>
         <div className='input-price'>
@@ -85,8 +85,8 @@ function ListItem({listItemText, removeItem, item, indexItem}) {
             onChange={validator}
             onBlur={roundPrice}
             value={item.price}
-            className={['input', 'price']}
-            placeholderText={'Set a price'}
+            className='input price'
+            placeholderText='Set a price'
           />
         </div>
         <PrimaryButton
@@ -94,7 +94,7 @@ function ListItem({listItemText, removeItem, item, indexItem}) {
             removeItem(item);
             stopPropagation(e);
           }}
-          className={['btn', 'delete']}
+          className='btn delete'
         >
           Delete
         </PrimaryButton>
