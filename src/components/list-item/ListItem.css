@@ -7,7 +7,7 @@
 }
 
 .list-item.dark-mode {
-  border-color: #3b336c;
+  border-color: var(--first-dark-mode-b-color);
 }
 
 .list-item:hover {
@@ -39,11 +39,11 @@
   content: '';
   width: 0;
   height: 2px;
-  background: #263057;
+  background: var(--primary-light-mode-color);
 }
 
 .text.dark-mode::before {
-  background: #eee;
+  background: var(--primary-dark-mode-color);
 }
 
 .text.done::before {

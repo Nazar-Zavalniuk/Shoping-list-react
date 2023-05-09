@@ -10,22 +10,22 @@
   text-align: center;
   white-space: nowrap;
   text-overflow: ellipsis;
-  border: 1px solid #263057;
-  color: #263057;
-  background: transparent;
+  border: 1px solid var(--primary-light-mode-color);
+  color: var(--primary-light-mode-color);
+  background: var(--neutral-color);
 }
 
 .input.dark-mode {
-  color: #eee;
-  border-color: #3b336c;
+  color: var(--primary-dark-mode-color);
+  border-color: var(--first-dark-mode-b-color);
 }
 
 .input:focus {
-  outline: 1px solid #263057;
+  outline: 1px solid var(--primary-light-mode-color);
 }
 
 .input.dark-mode:focus {
-  outline-color: #3b336c;
+  outline-color: var(--first-dark-mode-b-color);
 }
 
 .input:focus + .placeholder,
@@ -36,9 +36,9 @@
 .placeholder {
   position: absolute;
   pointer-events: none;
-  color: #263057;
+  color: var(--primary-light-mode-color);
 }
 
 .placeholder.dark-mode {
-  color: #eee;
+  color: var(--primary-dark-mode-color);
 }

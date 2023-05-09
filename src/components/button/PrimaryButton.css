@@ -1,23 +1,23 @@
 .btn {
   font-family: inherit;
   cursor: pointer;
-  color: #eee;
-  background: #263057;
-  border: 1px solid #263057;
+  color: var(--secondary-light-mode-color);
+  background: var(--primary-light-mode-color);
+  border: 1px solid var(--primary-light-mode-color);
   border-radius: 3px;
 }
 
 .btn.dark-mode {
-  background: #221c44;
-  border-color: #221c44;
+  background: var(--residual-dark-mode-color);
+  border-color: var(--residual-dark-mode-color);
 }
 
 .btn:active {
-  color: #263057;
-  background: #eee;
+  color: var(--primary-light-mode-color);
+  background: var(--secondary-light-mode-color);
 }
 
 .btn.dark-mode:active {
-  color: #eee;
-  background: transparent;
+  color: var(--primary-dark-mode-color);
+  background: var(--neutral-color);
 }

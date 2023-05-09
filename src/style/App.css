@@ -1,3 +1,5 @@
+@import url('AppColors.css');
+
 * {
   margin: 0;
   padding: 0;
@@ -17,13 +19,13 @@
 
 .app {
   font-family: 'Roboto', sans-serif;
-  color: #263057;
-  background-color: #eee;
+  color: var(--primary-light-mode-color);
+  background-color: var(--secondary-light-mode-color);
 }
 
 .app.dark-mode {
-  color: #eee;
-  background: #0f0b21;
+  color: var(--primary-dark-mode-color);
+  background: var(--secondary-dark-mode-color);
 }
 
 .content {

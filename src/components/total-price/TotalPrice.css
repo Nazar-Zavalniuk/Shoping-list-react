@@ -9,10 +9,10 @@
   text-align: center;
   word-break: break-word;
   color: #eee;
-  background: linear-gradient(180deg, #273158 0%, #0c244d 100%);
+  background: var(--gradient-light-mode);
   border-radius: 5px;
 }
 
 .total-price-text.dark-mode {
-  background: #221c44;
+  background: var(--residual-dark-mode-color);
 }

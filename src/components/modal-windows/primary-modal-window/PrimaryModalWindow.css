@@ -10,7 +10,7 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.25s ease 0s;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--modal-shadow-color);
 }
 
 .modal.active {
@@ -28,7 +28,7 @@
 }
 
 .modal-body.dark-mode {
-  background: #0f0b21;
+  background: var(--secondary-dark-mode-color);
 }
 
 .modal-body.active {

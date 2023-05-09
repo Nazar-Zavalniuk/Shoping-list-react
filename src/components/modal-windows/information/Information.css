@@ -17,12 +17,12 @@
 }
 
 .information-text::-webkit-scrollbar-thumb {
-  background: #2630574d;
+  background: var(--second-light-mode-bg-color);
 }
 
 .information-text.dark-mode::-webkit-scrollbar-thumb {
-  background: #b4aaee4d;
-  border-color: #3b336c;
+  background: var(--second-dark-mode-bg-color);
+  border-color: var(--first-dark-mode-b-color);
 }
 
 .input-block {
