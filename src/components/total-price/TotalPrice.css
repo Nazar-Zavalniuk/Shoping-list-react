@@ -1,0 +1,18 @@
+.total-price {
+  margin-top: 1.875rem;
+  padding-bottom: 15px;
+}
+
+.total-price-text {
+  padding: 0.75rem;
+  font-size: 1.5rem;
+  text-align: center;
+  word-break: break-word;
+  color: #eee;
+  background: var(--gradient-light-mode);
+  border-radius: 5px;
+}
+
+.total-price-text.dark-mode {
+  background: var(--residual-dark-mode-color);
+}

@@ -1,0 +1,13 @@
+.item-list {
+  flex: 1 1 auto;
+}
+
+.remove-item-list-body {
+  display: flex;
+  flex-flow: row-reverse;
+}
+
+.delete-all {
+  padding: 4px 6px;
+  font-size: inherit;
+}
